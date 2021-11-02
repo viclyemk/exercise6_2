@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,6 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -58,17 +57,20 @@ class _MyHomePageState extends State<MyHomePage> {
                                   hintText: 'Type something: ',
                                   fillColor: Colors.grey[100],
                                   filled: true,
-                                    suffixIcon: IconButton(
-                                        onPressed: () {
-                                          print(state);
-                                          context.read<TextCubit>().capatalise(state);
-                                        },
-                                        icon: const Icon(Icons.check_circle_rounded),
-                                     ),
                                 ),
                                       onChanged: (String? value) {
                                       state = value!;
                                      },
+                                ),
+                                SizedBox(
+                                  height:20,
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    print(state);
+                                    context.read<TextCubit>().capatalise(state);
+                                  },
+                                  child: const Text('Capitalize'),
                                 ),
 
                             ],);
@@ -77,23 +79,16 @@ class _MyHomePageState extends State<MyHomePage> {
                           BlocBuilder(
                             bloc: context.read<TextCubit>(),
                             builder: (context, state) {
-                              return Container(
-                                margin: const EdgeInsets.only(top: 10, bottom: 10),
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.black,
-                                  ),
-                                  color: Colors.yellowAccent,
+                               return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 16),
+                                  child: Text(
+                                    'Capitalize: $state',
+                                    style: TextStyle(fontWeight: FontWeight.w900,color: Colors.orange),
                                 ),
-                                child: Container(
-                                  height: 50,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [Text('$state')],
-                                  ),
-                                ),
-                              );
-                            }),
+                            );
+                          }),
+                        
                     ],
                   ),
                 ),
