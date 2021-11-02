@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             return Column(children: [
                               TextFormField(
                                 decoration: InputDecoration(
-                                  hintText: 'Enter word: ',
+                                  hintText: 'Type something: ',
                                   fillColor: Colors.grey[100],
                                   filled: true,
                                     suffixIcon: IconButton(
